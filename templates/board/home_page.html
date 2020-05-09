@@ -1,0 +1,31 @@
+{% extends 'base.html' %}
+
+{% block content %}
+<h4>Recent Sessions</h4>
+<table class="table table-sm">
+    <thead>
+        <tr>
+            <th>Session</th>
+            <th>Date</th>
+            <th>Active Handlers</th>
+            <th>Median Handler Time</th>
+            <th>Crawler ID</th>
+            <th>Host</th>
+        </tr>
+    </thead>
+{% for session in sessions %}
+<tr>
+    <td>
+        <a href="{% url "board:session_page" session.data.session_id %}">
+            {{ session.data.session_id }}
+        </a>
+    </td>
+    <td>{{ session.date }}</td>
+    <td>{{ session.data.num_active_handlers }}</td>
+    <td>{{ session.data.median_handler_active_time|floatformat:"-2" }}</td>
+    <td>{{ session.data.crawler_id }}</td> 
+    <td>{{ session.data.hostname }}</td> 
+</tr>
+{% endfor %}
+</table>
+{% endblock %}

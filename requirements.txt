@@ -1,0 +1,12 @@
+psycopg2-binary
+django
+django-extensions
+django-crispy-forms
+django-widget-tweaks
+runscript
+gunicorn
+python-dateutil
+pytz
+pymongo
+ujson
+pyyaml

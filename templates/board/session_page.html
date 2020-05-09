@@ -1,0 +1,37 @@
+{% extends 'base.html' %}
+
+{% block content %}
+<p>
+    <a href="{% url "board:home_page" %}">&larr; back to handlers</a>
+</p>
+<h4>Session: {{ session.session_id }}</h4>
+<pre>{{ session_data }}</pre>
+<h4>Stats</h4>
+<table class="table table-sm">
+    {% for key, val in stat %}
+    <tr class="d-flex">
+        <td class="col-4">{{ key }}</td>
+        <td class="col-8">{{ val }}</td>
+    </tr>
+    {% endfor %}
+</table>
+<h4>Handlers</h4>
+<table class="table table-sm">
+    <thead>
+        <tr>
+            <th>Start Time</th>
+            <th>Active Time</th>
+            <th>Retry Count</th>
+            <th>URL</th>
+        </tr>
+    </thead>
+    {% for handler in session_handlers %}
+    <tr>
+        <td>{{ handler.start_time|floatformat:-2 }}</td>
+        <td>{{ handler.active_time|floatformat:-2 }}</td>
+        <td>{{ handler.retry_count }}</td>
+        <td><span title="{{ handler.url }}">{{ handler.url|truncatechars:30 }}...</span></td>
+    </tr>
+    {% endfor %}
+</table>
+{% endblock %}
